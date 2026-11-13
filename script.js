@@ -358,7 +358,7 @@
       '<button class="knop knop-secundair" type="button" id="hoe-knop">HOE SPEEL JE?</button>',
       '</div>',
       '<div class="missie-meta">',
-      '<div class="meta-item"><strong>04</strong><span>Levels</span></div>',
+      '<div class="meta-item"><strong>04</strong><span>Niveaus</span></div>',
       '<div class="meta-item"><strong>17</strong><span>Kennischecks</span></div>',
       '<div class="meta-item"><strong>170</strong><span>Te verdienen punten</span></div>',
       '</div>',
@@ -380,11 +380,11 @@
       '<p class="bovenlabel">VOORBEREIDING</p><h1 class="titel-middel">Hoe speel je Vape Escape?</h1>' +
       '<p class="subtitel">Lees de regels en begin daarna aan je missie. Je hoeft niets te installeren en je kunt op je eigen tempo spelen.</p>' +
       '<div class="uitleg-grid">' +
-      '<article class="uitleg-kaart"><span class="uitleg-nummer">01</span><div><h3>Speel vier levels</h3><p>Begin bij Vape-feiten. Daarna speel je Feit of fabel, Groepsdruk en de laatste ontsnapping vrij.</p></div></article>' +
+      '<article class="uitleg-kaart"><span class="uitleg-nummer">01</span><div><h3>Speel vier niveaus</h3><p>Begin bij Vape-feiten. Daarna speel je Feit of fabel, Groepsdruk en de laatste ontsnapping vrij.</p></div></article>' +
       '<article class="uitleg-kaart"><span class="uitleg-nummer">02</span><div><h3>Verdien punten</h3><p>Elk goed antwoord is 10 punten waard. Na ieder antwoord krijg je uitleg, ook als je het fout hebt.</p></div></article>' +
       '<article class="uitleg-kaart"><span class="uitleg-nummer">03</span><div><h3>Bewaar je voortgang</h3><p>Je score en vrijgespeelde levels worden automatisch op dit apparaat opgeslagen.</p></div></article>' +
       '</div>' +
-      '<div class="paneel paneel-padding"><div class="level-tips"><span>◎</span><p><strong>Goed om te weten:</strong> je hoeft niet alles meteen goed te hebben. Gebruik de uitleg om te leren. Je kunt levels opnieuw spelen en je score verbeteren.</p></div>' +
+      '<div class="paneel paneel-padding"><div class="level-tips"><span>◎</span><p><strong>Goed om te weten:</strong> je hoeft niet alles meteen goed te hebben. Gebruik de uitleg om te leren. Je kunt niveaus opnieuw spelen en je score verbeteren.</p></div>' +
       '<div class="rij-knoppen" style="margin-top:22px"><button class="knop knop-primair" type="button" id="start-knop">BEGREPEN — START! <span class="knop-pijl">→</span></button></div></div>' +
       '</section>';
   }
@@ -393,10 +393,10 @@
     const beschikbaar = isLevelVrij(index);
     const klaar = voortgang.completed[index] === true;
     const status = klaar ? "AFGEROND" : (beschikbaar ? "VRIJGESPEELD" : "VERGRENDELD");
-    const actie = klaar ? "OPNIEUW SPELEN ↗" : (beschikbaar ? "START LEVEL ↗" : "SPEEL EERST LEVEL " + index);
+    const actie = klaar ? "OPNIEUW SPELEN ↗" : (beschikbaar ? "START LEVEL ↗" : "SPEEL EERST NIVEAU " + index);
     const className = klaar ? "afgerond" : (beschikbaar ? "beschikbaar" : "vergrendeld");
     return '<article class="level-kaart ' + className + '">' +
-      '<div class="level-kop"><span class="level-nummer">LEVEL 0' + (index + 1) + '</span><span class="level-status">' + status + '</span></div>' +
+      '<div class="level-kop"><span class="level-nummer">NIVEAU 0' + (index + 1) + '</span><span class="level-status">' + status + '</span></div>' +
       '<h3>' + levelNames[index] + '</h3><p>' + levelDescriptions[index] + '</p>' +
       '<div class="level-actie"><span>' + actie + '</span><span>' + (klaar ? "✓" : (beschikbaar ? "→" : "×")) + '</span></div>' +
       '<button type="button" data-action="start-level" data-level="' + index + '"' + (beschikbaar ? "" : " disabled") + ' aria-label="' + (beschikbaar ? "Speel " + levelNames[index] : levelNames[index] + " is vergrendeld") + '"></button>' +
@@ -410,13 +410,13 @@
     return '<section class="pagina">' +
       '<div class="terugrij">' + terugKnop("Hoofdmenu", "naar-start") + '<button class="tekstknop" type="button" data-action="reset">↻ Opnieuw beginnen</button></div>' +
       '<p class="bovenlabel">KIES JE VOLGENDE STAP</p><h1 class="titel-middel">De missiekaart</h1>' +
-      '<p class="subtitel">Vier levels brengen je dichter bij de uitgang. Voltooi een level om het volgende vrij te spelen.</p>' +
+      '<p class="subtitel">Vier levels brengen je dichter bij de uitgang. Voltooi een niveau om het volgende vrij te spelen.</p>' +
       '<div class="voortgang-paneel"><div class="voortgang-tekst"><div class="voortgang-boven"><span>MISSIEVOORTGANG</span><strong>' + klaar + ' / 4 LEVELS</strong></div>' +
       '<div class="voortgang-balk"><div class="voortgang-vulling" style="width:' + voortgangPercentage + '%"></div></div></div>' +
       '<div class="score-chip"><strong>' + score() + '</strong><span>VAN 170 PUNTEN</span></div></div>' +
       '<div class="level-grid">' + [0, 1, 2, 3].map(renderLevelKaart).join("") + '</div>' +
       '<div class="land-regels">' +
-      '<article class="land-kaart"><span class="land-naam">Nederland</span><strong>Leeftijdsgrens en smaakverbod</strong><p>Verkoop aan jongeren onder 18 is verboden. Sinds 2024 mogen vapes met andere smaken dan tabak niet worden verkocht.</p></article>' +
+      '<article class="land-kaart"><span class="land-naam">Nederland</span><strong>Leeftijdsgrens en smaakverbod</strong><p>Verkoop aan jongeren onder 18 is verboden. Sinds 2024 mogen vapes met andere smaken dan tabak niet worden verkocht. Sinds 2026 mogen vapes alleen nog in tabaksspeciaalzaken worden verkocht.</p></article>' +
       '<article class="land-kaart"><span class="land-naam">Verenigd Koninkrijk</span><strong>Wegwerpvapes verboden</strong><p>Sinds 1 juni 2025 is de verkoop en levering van wegwerpvapes verboden. Herbruikbare vapes vallen niet onder dit specifieke verbod.</p></article>' +
       '<article class="land-kaart"><span class="land-naam">Australië</span><strong>Alleen via apotheken</strong><p>Vapes mogen alleen via apotheken worden verstrekt als therapeutische producten. Daar gelden strenge voorwaarden voor.</p></article>' +
       '</div><p class="wet-notitie">Regels verschillen per land en kunnen veranderen. Dit zijn voorbeelden van landelijke regels, geen volledig juridisch overzicht. De bronnen onderaan deze pagina verwijzen naar officiële informatie.</p>' +
@@ -453,7 +453,7 @@
       '<div><strong>' + kop + '</strong><p>' + (gekozenUitleg || q.explanation || "") + '</p>' +
       (extra ? '<p class="feedback-extra">' + extra + '</p>' : '') +
       '</div></div>' +
-      '<div class="feedback-acties"><button class="knop knop-primair knop-klein" type="button" data-action="volgende">' + (huidigeVraag + 1 >= aantal ? "LEVEL AFRONDEN" : "VOLGENDE VRAAG") + ' →</button></div>';
+      '<div class="feedback-acties"><button class="knop knop-primair knop-klein" type="button" data-action="volgende">' + (huidigeVraag + 1 >= aantal ? "NIVEAU AFRONDEN" : "VOLGENDE VRAAG") + ' →</button></div>';
   }
 
   function renderMeerkeuzeVraag(q, vraagIndex, totaal, isFeit) {
@@ -520,13 +520,13 @@
   function renderLevelKlaar() {
     const next = huidigLevel + 1;
     return '<section class="pagina"><div class="paneel afrond-kaart">' +
-      '<div class="afrond-embleem">✓</div><p class="bovenlabel" style="justify-content:center">LEVEL VOLTOOID</p>' +
+      '<div class="afrond-embleem">✓</div><p class="bovenlabel" style="justify-content:center">NIVEAU VOLTOOID</p>' +
       '<h1 class="titel-middel">' + levelNames[huidigLevel] + '</h1>' +
       '<p>Je hebt dit level afgerond. Bekijk de uitleg die je hebt gekregen en ga daarna door naar de volgende uitdaging.</p>' +
-      '<div class="afrond-statistieken"><div class="statistiek"><strong>' + levelPunten(huidigLevel) + '</strong><span>Punten in dit level</span></div><div class="statistiek"><strong>' + score() + '</strong><span>Totaal aantal punten</span></div><div class="statistiek"><strong>' + afgerondeLevels() + ' / 4</strong><span>Levels afgerond</span></div></div>' +
+      '<div class="afrond-statistieken"><div class="statistiek"><strong>' + levelPunten(huidigLevel) + '</strong><span>Punten in dit niveau</span></div><div class="statistiek"><strong>' + score() + '</strong><span>Totaal aantal punten</span></div><div class="statistiek"><strong>' + afgerondeLevels() + ' / 4</strong><span>Levels afgerond</span></div></div>' +
       '<div class="eindboodschap">Je voortgang is opgeslagen. Het volgende level is nu vrijgespeeld.</div>' +
       '<div class="rij-knoppen"><button class="knop knop-secundair" type="button" data-action="naar-kaart">MISSIEKAART</button>' +
-      (next < 4 ? '<button class="knop knop-primair" type="button" data-action="volgend-level">VOLGEND LEVEL →</button>' : '<button class="knop knop-primair" type="button" data-action="eindscherm">BEKIJK RESULTAAT →</button>') +
+      (next < 4 ? '<button class="knop knop-primair" type="button" data-action="volgend-level">VOLGEND NIVEAU →</button>' : '<button class="knop knop-primair" type="button" data-action="eindscherm">BEKIJK RESULTAAT →</button>') +
       '</div></div></section>';
   }
 
