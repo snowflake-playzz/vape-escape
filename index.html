@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b14">
+  <meta name="description" content="Vape Escape is een Nederlandstalig educatief spel over vapen, nicotine, gezondheid, groepsdruk en regels in verschillende landen.">
+  <title>Vape Escape — De overlevingsgame</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="achtergrond-licht achtergrond-licht-links" aria-hidden="true"></div>
+  <div class="achtergrond-licht achtergrond-licht-rechts" aria-hidden="true"></div>
+
+  <div class="site-shell">
+    <header class="bovenbalk">
+      <a class="merk" href="#" id="merk-knop" aria-label="Vape Escape — naar het hoofdmenu">
+        <span class="merk-icoon" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="merk-tekst">VAPE<span>ESCAPE</span></span>
+      </a>
+      <div class="bovenbalk-acties">
+        <span class="status-label"><span class="status-punt"></span> EDUCATIEVE MISSIE</span>
+        <button class="icoon-knop" id="geluid-knop" type="button" aria-label="Geluid inschakelen" title="Geluid inschakelen">
+          <svg class="geluid-aan" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path><path d="M18.5 5.5a9 9 0 0 1 0 13"></path></svg>
+          <svg class="geluid-uit" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"></path><path d="m16 9 5 6"></path><path d="m21 9-5 6"></path></svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="app" class="app-inhoud" tabindex="-1" aria-live="polite">
+      <noscript>
+        <section class="kaart">
+          <h1>JavaScript is nodig</h1>
+          <p>Schakel JavaScript in om Vape Escape te spelen.</p>
+        </section>
+      </noscript>
+    </main>
+
+    <footer class="voettekst">
+      <div class="bronregel">
+        <span>FEITEN &amp; INFORMATIE</span>
+        <nav aria-label="Betrouwbare informatiebronnen">
+          <a href="https://www.rivm.nl/tabak/producten/wat-is-een-e-sigaret" target="_blank" rel="noopener noreferrer">RIVM</a>
+          <a href="https://www.trimbos.nl/kennis/roken-tabak/e-sigaret-en-vape/" target="_blank" rel="noopener noreferrer">Trimbos-instituut</a>
+          <a href="https://www.rijksoverheid.nl/themas/familie-zorg-en-gezondheid/roken/regels-vapes" target="_blank" rel="noopener noreferrer">Rijksoverheid</a>
+          <a href="https://www.gov.uk/guidance/single-use-vapes-ban" target="_blank" rel="noopener noreferrer">Verenigd Koninkrijk</a>
+          <a href="https://www.health.gov.au/topics/smoking-vaping-and-tobacco/about-vaping" target="_blank" rel="noopener noreferrer">Australië</a>
+        </nav>
+      </div>
+      <p>Gemaakt voor een schoolproject · HAVO 2 · Informatie gecontroleerd op 13 november 2026</p>
+      <p class="voettekst-klein">Educatieve informatie, geen medisch advies. Wetten kunnen veranderen: controleer bij twijfel altijd de actuele regels van de overheid.</p>
+    </footer>
+  </div>
+</body>
+</html>
