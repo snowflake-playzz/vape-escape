@@ -5,7 +5,6 @@
   const soundButton = document.getElementById("geluid-knop");
   const brandButton = document.getElementById("merk-knop");
   const STORAGE_KEY = "vape-escape-voortgang-v1";
-  const MAX_SCORE = 170;
   const TOTAL_QUESTIONS = 17;
   const levelNames = ["Vape-feiten", "Feit of fabel", "Groepsdruk", "De laatste ontsnapping"];
   const levelDescriptions = [
@@ -343,8 +342,8 @@
     app.focus({ preventScroll: true });
   }
 
-  function terugKnop(label) {
-    return '<button class="tekstknop" type="button" data-action="naar-kaart">← ' + (label || "Terug naar het overzicht") + '</button>';
+  function terugKnop(label, action) {
+    return '<button class="tekstknop" type="button" data-action="' + (action || "naar-kaart") + '">← ' + (label || "Terug naar het overzicht") + '</button>';
   }
 
   function renderStart() {
@@ -377,7 +376,7 @@
 
   function renderHoe() {
     return '<section class="pagina">' +
-      '<div class="terugrij">' + terugKnop("Naar het hoofdmenu") + '<span class="mini-label">SPELREGELS</span></div>' +
+      '<div class="terugrij">' + terugKnop("Naar het hoofdmenu", "naar-start") + '<span class="mini-label">SPELREGELS</span></div>' +
       '<p class="bovenlabel">VOORBEREIDING</p><h1 class="titel-middel">Hoe speel je Vape Escape?</h1>' +
       '<p class="subtitel">Lees de regels en begin daarna aan je missie. Je hoeft niets te installeren en je kunt op je eigen tempo spelen.</p>' +
       '<div class="uitleg-grid">' +
@@ -409,7 +408,7 @@
     const voortgangPercentage = Math.round((klaar / 4) * 100);
     const eindKnop = voortgang.completed[3] ? '<div class="rij-knoppen" style="margin-top:22px"><button class="knop knop-primair" type="button" data-action="eindscherm">BEKIJK JE EINDRESULTAAT →</button></div>' : "";
     return '<section class="pagina">' +
-      '<div class="terugrij">' + terugKnop("Hoofdmenu") + '<button class="tekstknop" type="button" data-action="reset">↻ Opnieuw beginnen</button></div>' +
+      '<div class="terugrij">' + terugKnop("Hoofdmenu", "naar-start") + '<button class="tekstknop" type="button" data-action="reset">↻ Opnieuw beginnen</button></div>' +
       '<p class="bovenlabel">KIES JE VOLGENDE STAP</p><h1 class="titel-middel">De missiekaart</h1>' +
       '<p class="subtitel">Vier levels brengen je dichter bij de uitgang. Voltooi een level om het volgende vrij te spelen.</p>' +
       '<div class="voortgang-paneel"><div class="voortgang-tekst"><div class="voortgang-boven"><span>MISSIEVOORTGANG</span><strong>' + klaar + ' / 4 LEVELS</strong></div>' +
@@ -425,7 +424,7 @@
   }
 
   function renderSpelBalk(index, stap, totaal) {
-    const percentage = Math.round((stap / totaal) * 100);
+    const percentage = Math.round(((stap + 1) / totaal) * 100);
     return '<div class="spel-voortgang"><strong>LEVEL 0' + (index + 1) + ' · ' + levelNames[index].toUpperCase() + '</strong><span>VRAAG ' + (stap + 1) + ' / ' + totaal + '</span></div>' +
       '<div class="voortgang-balk" style="margin-bottom:19px"><div class="voortgang-vulling" style="width:' + percentage + '%"></div></div>';
   }
@@ -472,7 +471,7 @@
     let feedbackHtml = "";
     if (isBeantwoord) {
       const correctText = isFeit ? (q.correctIndex === 0 ? "Waar" : "Niet waar") : q.options[q.correctIndex];
-      const extra = feedback.goed ? "" : "Het juiste antwoord: " + correctText + ".";
+      const extra = feedback.goed ? "" : (feedback.eerderGoed ? "Je had deze vraag eerder al goed beantwoord; dat punt blijft staan." : "Het juiste antwoord: " + correctText + ".");
       feedbackHtml = renderFeedback(q, feedback.goed, q.explanation, extra);
     }
     return '<div class="paneel vraag-paneel"><span class="vraag-label">' + titel + '</span><h2 class="vraag-titel">' + q.prompt + '</h2>' + intro +
@@ -490,7 +489,7 @@
     let feedbackHtml = "";
     if (isBeantwoord) {
       const gekozen = q.options[feedback.gekozen];
-      const extra = feedback.goed ? q.bestReason : "Een handigere aanpak: " + q.bestReason;
+      const extra = feedback.goed ? q.bestReason : (feedback.eerderGoed ? "Je had deze situatie eerder al goed opgelost; dat punt blijft staan." : "Een handigere aanpak: " + q.bestReason);
       feedbackHtml = renderFeedback(q, feedback.goed, gekozen.outcome, extra);
     }
     return '<div class="paneel vraag-paneel"><span class="vraag-label">SITUATIE · JOUW KEUZE</span><h2 class="vraag-titel">' + q.prompt + '</h2><p class="vraag-context">' + q.context + '</p><div class="antwoord-opties scenario-opties">' + optiesHtml + '</div>' + feedbackHtml + '</div>';
@@ -503,7 +502,7 @@
       '<p class="vraag-context">De uitgang is bijna open. Combineer de regels en feiten uit de vorige levels om de code te vinden.</p>' +
       '<div class="code-cijfers" aria-label="Vier cijfers nodig"><span>?</span><span>?</span><span>?</span><span>?</span></div>' +
       '<div class="code-aanwijzingen"><div class="code-aanwijzing"><b>1–2</b><span>In Nederland mag een vape pas vanaf welke leeftijd worden verkocht? Gebruik beide cijfers.</span></div><div class="code-aanwijzing"><b>3</b><span>Hoeveel milliliter mag het reservoir van een vape maximaal bevatten volgens de Nederlandse regels?</span></div><div class="code-aanwijzing"><b>4</b><span>In welk jaar ging het verbod op de verkoop van wegwerpvapes in het Verenigd Koninkrijk in? Gebruik alleen het laatste cijfer.</span></div></div>' +
-      '<form class="code-formulier" id="code-formulier"><label class="mini-label" for="code-invoer" style="position:absolute;left:-9999px">Voer de viercijferige code in</label><input class="code-invoer" id="code-invoer" name="code" type="text" inputmode="numeric" autocomplete="off" maxlength="4" pattern="[0-9]{4}" placeholder="0000" aria-describedby="code-melding" required><button class="knop knop-primair" type="submit">OPEN HET SLOT →</button></form>' +
+      '<form class="code-formulier" id="code-formulier"><label class="mini-label" for="code-invoer" style="position:absolute;left:-9999px">Voer de viercijferige code in</label><input class="code-invoer" id="code-invoer" name="code" type="text" inputmode="numeric" autocomplete="off" maxlength="4" placeholder="0000" aria-describedby="code-melding"><button class="knop knop-primair" type="submit">OPEN HET SLOT →</button></form>' +
       '<p class="code-melding" id="code-melding" role="status">' + (codeMelding || "Tip: bekijk de uitleg en de landenregels nog eens als je twijfelt.") + '</p>' +
       '</div>';
   }
@@ -581,8 +580,9 @@
     else if (huidigLevel === 2) vraag = scenarios[huidigeVraag];
     if (!vraag) return;
     const goed = huidigLevel === 2 ? vraag.options[index].best : index === vraag.correctIndex;
+    const eerderGoed = voortgang.answers[vraag.id] === true;
     registreerAntwoord(vraag.id, goed);
-    feedback = { id: vraag.id, gekozen: index, goed: goed };
+    feedback = { id: vraag.id, gekozen: index, goed: goed, eerderGoed: eerderGoed };
     speelGeluid(goed);
     render();
   }
@@ -660,6 +660,8 @@
       gaNaar("hoe");
     } else if (knopElement.dataset.action === "naar-kaart") {
       gaNaar("kaart");
+    } else if (knopElement.dataset.action === "naar-start") {
+      gaNaar("start");
     } else if (knopElement.dataset.action === "start-level") {
       startLevel(Number(knopElement.dataset.level));
     } else if (knopElement.dataset.action === "antwoord") {
