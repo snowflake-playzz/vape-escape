@@ -84,6 +84,7 @@ a { color: inherit; }
 .bovenlabel::before { content: ""; display: block; width: 24px; height: 1px; background: var(--groen); box-shadow: 0 0 10px var(--groen); }
 .titel-groot { max-width: 760px; margin: 0; font-size: clamp(42px, 7.1vw, 82px); line-height: .96; font-weight: 950; letter-spacing: -.065em; }
 .titel-groot .accent { color: var(--groen); text-shadow: 0 0 32px rgba(142,245,179,.2); }
+.titel-middel .accent { color: var(--groen); text-shadow: 0 0 28px rgba(142,245,179,.2); }
 .titel-middel { margin: 0; font-size: clamp(30px, 4vw, 46px); font-weight: 900; letter-spacing: -.045em; line-height: 1.05; }
 .subtitel { max-width: 600px; margin: 20px 0 0; color: var(--gedempt); font-size: 16px; line-height: 1.75; }
 .knop {
